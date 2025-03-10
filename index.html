@@ -1309,6 +1309,9 @@ y cuáles con fecha de caducidad…
         <!--<p>Email: xavi.villa@yahoo.es</p>-->
       </div>
       <p>&copy; 2025 Proyecto Veterano. Todos los derechos reservados.</p>
+
+	    <p id="contador-visitas" style="font-size: 8px; color: rgba(255,255,255,0.5); text-align: center;">Visitas: <span id="visitas">0</span></p>
+
     </footer>
   </div> <!-- Cierre de main-content -->
   
@@ -1387,6 +1390,14 @@ function controlarAudio() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    let visitas = localStorage.getItem("contadorVisitas") || 0;
+    visitas++;
+    localStorage.setItem("contadorVisitas", visitas);
+    document.getElementById("visitas").textContent = visitas;
+});
+
 
   </script>
 </body>
