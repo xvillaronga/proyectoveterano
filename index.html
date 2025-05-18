@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Proyecto Veterano</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos para los reproductores de audio y las imágenes */
+        .audio-player-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .song-cover {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .song-cover:hover {
+            transform: scale(1.02);
+        }
+        
+        .audio-controls {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .watch-video-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .watch-video-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .watch-video-btn i {
+            margin-right: 5px;
+        }
+        
+        /* Estilos para la ventana modal de video */
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-video-container {
+            position: relative;
+            width: auto;
+            max-height: 80vh;
+            margin: auto;
+        }
+        
+        .modal-video-container.vertical {
+            width: auto;
+            height: 80vh;
+        }
+        
+        .modal-video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .close-video-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Corrección de estilos para el footer */
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .footer-cta {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Proyecto Veterano</a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Inicio</a></li>
+                <li><a href="#about" class="nav-link">Sobre Mí</a></li>
+                <li><a href="#videos" class="nav-link">Música y Videos</a></li>
+                <li><a href="#contact" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header>
+        <div class="hero-content">
+            <h2>Bienvenid@s al</h2>
+            <h1>"Proyecto Veterano"</h1>
+            <h2>by Xavi Villaronga</h2>
+            <p>Autor, Compositor y Productor musical.</p>
+            <a href="#videos" class="btn">Disfruta de la Música</a>
+        </div>
+    </header>
+
+    <!-- Acerca del Artista Section -->
+    <section id="about" class="about-section">
+        <div class="container about-container">
+            <div class="about-img">
+                <img src="img/duoxavi.png" alt="Foto del artista">
+            </div>
+            <div class="about-text">
+                <h2 class="section-title">Sobre Mí</h2>
+                <p>Hola,
+            
+                Soy Xavi Villaronga, autor, compositor, productor y arreglista. Un apasionado por la música con un enfoque fresco y pegadizo. He compuesto mas de 20 temas originales que combinan pop y diversos estilos de música urbana, con letras auténticas y melodías memorables.
+                </p>
+                <p>Estoy buscando oportunidades para llevar mi música al siguiente nivel y creo que podría encajar en vuestro catálogo. Adjunto algunas muestras para que podáis escucharlas. Estoy abierto a propuestas de colaboración, distribución o venta de los temas.
+                </p>
+                <p>Todas las canciones están convenientemente registradas y son de mi propiedad al 100%.</p>
+                <p>Me encantaría recibir vuestra opinión y explorar cómo podríamos trabajar juntos. Si os interesa, podemos concertar una reunión o llamada.</p>
+                <p>Gracias por vuestro tiempo.
+                
+                Un saludo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section (ahora será Audio Section) -->
+    <section id="videos" class="videos-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mi Música</h2>
+                <p>Explora mi colección de canciones y descubre mi universo sonoro.</p>
+            </div>
+            <div class="videos-grid">
+                <!-- Canción 1 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/La historia mas bonita.PNG" alt="Portada La historia mas bonita" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/La historia mas bonita.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="lytrxh0MlxM" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>La historia mas bonita</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2025</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion1">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Canción 2 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/Nueve de Mayo.PNG" alt="Portada Nueve de Mayo" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/Nueve de Mayo.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="Ydl6tU7piJ0" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Nueve de Mayo</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2025</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion2">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Canción 3 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/Dormias.PNG" alt="Portada Dormias" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/Dormias.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="JOaKpIxG0uU" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Dormias</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2024</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion3">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Canción 4 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/La puerta secreta.PNG" alt="La puerta secreta" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/La puerta secreta.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="pnGN4t29cEI" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>La puerta secreta</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2024</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion4">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Canción 5 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/Olvidar.PNG" alt="Portada Olvidar" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/Olvidar.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="H6tDUr8M3ns" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Olvidar</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2023</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion5">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Canción 6 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/Que hubiera pasado.PNG" alt="Portada Que hubiera pasado" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/Que hubiera pasado.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="HMpuKuP_jAA" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Que hubiera pasado</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2023</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion6">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+                
+				<!-- Canción 7 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/Noche clara.PNG" alt="Portada Noche clara" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/Noche clara.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="HMpuKuP_jAA" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Noche clara</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2024</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion7">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+				
+				<!-- Canción 8 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/Partner in crime.JPG" alt="Portada Partner in crime" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/Partner in crime.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="HMpuKuP_jAA" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Partner in crime</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2024</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion8">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+				
+				<!-- Canción 9 -->
+                <div class="video-card">
+                    <div class="audio-player-container">
+                        <img src="img/Sweet Barcelona.PNG" alt="Portada Sweet Barcelona" class="song-cover">
+                        <div class="audio-controls">
+                            <audio controls class="audio-player">
+                                <source src="audio/Sweet Barcelona.mp3" type="audio/mpeg">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+							<!--
+                            <button class="watch-video-btn" data-video-id="HMpuKuP_jAA" data-vertical="true">
+                                <i class="fas fa-play-circle"></i> Ver Video
+                            </button>
+							-->
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Sweet Barcelona</h3>
+                        <p></p>
+                        <div class="video-tags">
+                            <span class="tag">2024</span>
+                            <span class="tag tag-lyrics" data-cancion="cancion9">Ver letra</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Continúa con las canciones 7-12 siguiendo el mismo patrón -->
+                <!-- Las 6 canciones restantes seguirían el mismo patrón -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modal para Video de YouTube -->
+    <div id="video-modal" class="video-modal">
+        <div class="modal-video-container">
+            <span class="close-video-modal">&times;</span>
+            <div id="youtube-modal-player"></div>
+        </div>
+    </div>
+    
+    <!-- Ventanas modales para letras de canciones -->
+    <!-- Modales para las letras de las canciones -->
+    <div id="modal-cancion1" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>La historia mas bonita</h2>
+            <div class="letra-texto">
+                [Verso]
+Fue la chica del verano, mi mejor verano!
+A la que guiñaba el ojo y me cogió la mano
+Con dos tintos de verano no paramos de hablar
+Esa carita tan linda me invitaba a pasar
+
+[Verso]
+Habríamos cruzado mil calles en moto,
+ella en bikini mojado, yo en pantalones cortos.
+Nos fuimos a la rave en mi coche tuneado,
+Tú con ese top de Shein y yo medio colocado.
+
+[Estribillo]
+Quien a quien le hizo ghosting, quien borró mi WhatsApp
+Donde queda aquel “te quiero”, aquel “me vas a llamar?”
+La que no puedo olvidar aunque pasen los años
+La que llevo tatuada, mi highlight , mi daño.
+
+[Verso]
+Ahora, en un café de la Barceloneta,
+tu nombre en mi boca… y tú, con otra chaqueta.
+Me dijiste "hola" con voz de extraña,
+y el corazón se me heló… como nieve en la playa. 
+[Verso]
+Baby ya canta la luna, revivo el calor
+Sólo un “cómo estás?” que suena a abrazo y color
+Y cuando te fuiste cerré los ojos y pensé
+Que éramos la historia más bonita que soñé
+[Estribillo]
+Quien a quien le hizo ghosting, quien borró mi WhatsApp
+Donde queda aquel “te quiero”, aquel “me vas a llamar?”
+La que no puedo olvidar aunque pasen los años
+La que llevo tatuada, mi highlight , mi daño.
+[Verso]
+Bailó bajo un cielo dorado, pura libertad
+Su risa era centella que encendía la ciudad
+Con dos copas de chispa fuimos torbellino
+Esa invitación al baile nos llevó al destino
+[Verso]
+Pedaleamos por las calles junto al mar
+Ella en falda de colores, yo sin nada que pensar
+Brillaban en la noria luces de ilusión
+Tú con ese top florido y yo lleno de emoción
+[Estribillo]
+Quien a quien le hizo ghosting, quien borró mi WhatsApp
+Donde queda aquel “te quiero”, aquel “me vas a llamar?”
+La que no puedo olvidar aunque pasen los años
+La que llevo tatuada, mi highlight , mi daño.
+Quien a quien le hizo ghosting, quien borró mi WhatsApp
+Donde queda aquel “te quiero”, aquel “me vas a llamar?”
+La que no puedo olvidar aunque pasen los años
+La que llevo tatuada, mi highlight , mi daño.
+[Verso]
+Ahora en la terraza del puerto, brilla el atardecer
+Tu nombre vibra en mi voz… y yo vuelvo a renacer
+Me dijiste “hola” y el mundo se vistió de fiesta
+Y el latido del instante fue la chispa mas honesta
+[Verso]
+Baby ya canta la luna, revivo el calor
+Sólo un “cómo estás” que suena a abrazo y color
+Y cuando te fuiste cerré los ojos y pensé
+Que éramos la historia más bonita que soñé
+[Estribillo]
+Quien a quien le hizo ghosting, quien borró mi WhatsApp
+Donde queda aquel “te quiero”, aquel “me vas a llamar?”
+La que no puedo olvidar aunque pasen los años
+La que llevo tatuada, mi highlight , mi daño.
+Quien a quien le hizo ghosting, quien borró mi WhatsApp
+Donde queda aquel “te quiero”, aquel “me vas a llamar?”
+La que no puedo olvidar aunque pasen los años
+La que llevo tatuada, mi highlight , mi daño.
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-cancion2" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Nueve de Mayo</h2>
+            <div class="letra-texto">
+                [Verso]
+Se veía venir que esa noche
+La pasaba cenando a las 10
+No le haría a la vida un reproche
+Por mi charm de total dejadez.
+Revisadas mis redes sociales
+Ya tumbado frente al televisor
+El origen de todos mi males
+No era otro que yo.
+[Verso]
+Otro día de mi cumpleaños
+Recordando  los años de miel 
+Media vida ya había pasado
+Des que tuve tu cara y tu piel
+Otra noche de pan congelado
+De nostalgia y de Netflix también
+Tantas veces hubiera rezado
+Por volverte a ver.
+
+[Estribillo]
+Demasiada soda y tanto calor
+Provocaron mi fallo
+Fué tu ghosting quien me rómpio la voz
+Con la fuerza de un rayo
+Donde fuiste? Te hiciste esperar
+Cada día te he vuelto a soñar
+Una vida no me ha hecho olvidar
+Ese nueve de mayo.
+Donde fuiste? Te hiciste esperar
+Cada día te he vuelto a soñar
+Una vida no me ha hecho olvidar
+Ese nueve de mayo
+
+[Estribillo]
+Demasiada soda y tanto calor
+Provocaron mi fallo
+Fue tu ghosting quien me rompió la voz
+Con la fuerza de un rayo
+Donde fuiste? Te hiciste esperar
+Cada día te he vuelto a soñar
+Una vida no me ha hecho olvidar
+Ese nueve de mayo.
+Donde fuiste? Te hiciste esperar
+Cada día te he vuelto a soñar
+Una vida no me ha hecho olvidar
+Ese nueve de mayo
+
+[Verso]
+Se veía venir que esa noche (Otro día de mi cumpleaños)
+La pasaba cenando a las 10 (Recordando  los años de miel)
+No le haría a la vida un reproche (Media vida ya había pasado)
+Por mi charm de total dejadez. (Des que tuve tu cara y tu piel)
+Revisadas mis redes sociales (Otra noche de pan congelado)
+Ya tumbado frente al televisor (De nostalgia y de Netflix robado)
+El origen de todos mi males (Tantas veces hubiera rezado)
+No era otro que yo.( Por volverte a ver.)
+
+[Verso]
+Esta tarde te habría invitado
+Aun sabiendo tu bajo interés
+Tantas veces que yo te he llamado
+Suspirando por volverte a ver
+Y aunque pasen y pasen los años
+Y la pizza esté fría otra vez
+Añoranza con control de daños
+Lágrimas de papel
+
+[Estribillo]
+Demasiada soda y tanto calor
+Provocaron mi fallo
+Fue tu ghosting quien me rompió la voz
+Con la fuerza de un rayo
+Donde fuiste? Te hiciste esperar
+Cada día te he vuelto a soñar
+Una vida no me ha hecho olvidar
+Ese nueve de mayo.
+Donde fuiste? Te hiciste esperar
+Cada día te he vuelto a soñar
+Una vida no me ha hecho olvidar
+Ese nueve de mayo
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-cancion3" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Nombre de Canción 3</h2>
+            <div class="letra-texto">
+Una mañana de enero, me acosté a tu lado sin saber por qué. 
+Era precioso mirarte, ver cómo dormías soñando, soñabas ensoñándote. 
+Quise mirarte a los ojos, pero tus pupilas no me querían ver.
+Estaba jugando en la orilla de algún viejo sueño hecho de papel.
+ 
+Hubiera pasado la vida sintiendo tu aliento y tu respiración, 
+jugando en la dulce montaña de tu lindo pelo que ya ilumbraba el sol. 
+Cada minuto estaciado en tu rostro me hacía alejar el dolor 
+que sabía que tendría cuando despertaras con mi corazón.
+
+Una mañana, nay, no, nay, no, nay, no, na. 
+Una mañana, nay, no, nay, no, nay, no, na. 
+
+Te acaricié con los dedos como quien no quiere romper un cristal.
+Y en tus mejillas dormidas dibujé mi nombre con miedo a borrar tu paz. 
+Te susurré mil promesas que no conocías, pero quise inventar. 
+Eras la calma en un puerto y yo el marinero que nunca supo anclar.
+
+Hubiera vendido mi alma por detener el fugaz resplandor 
+que traía la aurora burlando la magia y apagando el reloj. 
+Cada segundo en silencio era una batalla contra el temor 
+de perderte mi sueño, mi último beso, mi eterno amor. 
+
+Una mañana, nay, no, nay, no, nay, no, na.
+Una mañana, nay, no, nay, no, nay, no, na. 
+
+Se fue la magia, nay, no, nay, no, nay, no, na. 
+Y yo me quedo, nay, no, nay, no, soñándote más.
+
+Y si el tiempo me roba tu nombre, si no vuelves jamás por aquí, 
+que el recuerdo sea el faro que alumbre mi penumbra, mi norte, mi fin. 
+
+Una mañana, nay, no, nay, no, nay, no, na. 
+Una mañana, nay, no, nay, no, nay, no, na.
+
+Te sigo amando, nay, no, nay, no, nay, no, na. 
+Y en mis mañanas, nay, no, nay, no, vuelves a estar. Oh, yeah, yeah, yeah.
+
+Nay, no, nay, no, oh. Yeah, yeah.
+
+            </div>
+        </div>
+    </div>
+	
+  <div id="modal-cancion4" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>La puerta secreta</h2>
+            <div class="letra-texto">
+Mirando en tu Insta, con mirada de fuego. 
+Tus DM’s eran llama tu cuerpo era deseo 
+Tu tatoo en 4K. Mi pulso acelerado. 
+Tus besos fueron trampa y yo caí encantado. 
+
+Nos perdimos juntos entre luces de neón 
+una noche sin nombre, noche sin explicación 
+Todo era por instinto, tu piel contra mi piel, 
+ese darkmode era un mito hasta que no lo fue.
+
+Literal, que estará pensando 
+sí en mi pecho el eco de su voz está temblando.
+Si el deseo es un grito, pero el miedo lo calla,  
+y en la sombra esconde la verdad que mami me estalla.
+
+Dime lo que harás cuando yo lo sepa, 
+cuando yo descubra la puerta secreta
+ dime si real o es tan solo un juego 
+tú en el Only Fans, yo quemándome en el fuego 
+Dime lo que harás cuando yo lo sepa, 
+cuando yo descubra la puerta secreta
+dime si real o es tan solo un juego 
+porque siento amor como sólo haría un ciego. 
+
+Eh, tú en mi cama como lienzo desnudo,
+ mi cuerpo en el tuyo, sin temor ni escudo.
+Dijimos al principio, esta es solo diversión, 
+pero el cuore apuntaba en otra dirección. 
+Las madrugadas ya no saben igual. 
+El deseo nos hizo un pacto desleal, 
+pero hay un muro que nunca ha cruzado, 
+ese espacio de tu feed donde nunca he posteado. 
+Literal, que estará pensando 
+sí en mi pecho el eco de su voz está temblando. 
+Si el deseo es un grito, pero el miedo lo calla 
+y en las sombras esconde la verdad que mami me estalla.
+
+Dime lo que harás cuando yo lo sepa, cuando yo descubra la puerta secreta
+ dime si real o es tan solo un juego 
+tú en el Only Fans yo quemándome en el fuego 
+Dime lo que harás cuando yo lo sepa, cuando yo descubra la puerta secreta
+dime si real o es tan solo un juego 
+porque siento amor como sólo haría un ciego. 
+
+
+y cada vez que te vas 
+veo sombras en el portal, 
+miles de ojos que te ven 
+pero yo no puedo ni entender …
+
+Dime lo que harás cuando yo lo sepa, cuando yo descubra la puerta secreta
+ dime si real o es tan solo un juego 
+tú en el Only Fans yo quemándome en el fuego 
+Dime lo que harás cuando yo lo sepa, cuando yo descubra la puerta secreta
+dime si real o es tan solo un juego 
+porque siento amor como sólo haría un ciego. 
+
+Dime lo que harás cuando yo lo sepa, cuando yo descubra la puerta secreta
+ dime si real o es tan solo un juego 
+tú en el Only Fans yo quemándome en el fuego 
+Dime lo que harás cuando yo lo sepa, cuando yo descubra la puerta secreta
+dime si real o es tan solo un juego 
+porque siento amor como haría un ciego. 
+
+
+            </div>
+        </div>
+    </div>
+	
+ <div id="modal-cancion5" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Olvidar</h2>
+            <div class="letra-texto">
+Como te has podido olvidar
+Después de toda una vida
+D’este simple pájaro herido
+Que tu alá protegía
+Cómo tu cerebro cerró
+La puerta donde vivías
+Donde se escondieron ahí
+Los besos que tu tenias
+
+Tantas puestas de sol
+Y tantas noches perdías
+Tantas madrugadas azul
+En las que tu sonreías
+Todo está nublado ahora en ti
+Todo son sombras vacías
+Dile a esa dolencia feroz
+Que tu ya la maldecías
+
+Y hoy nooooo
+hoy no pienso ir a verte con este dolor
+No quiero borrar tus fotos de la habitación
+No puedo pedir a Dios que rompa esta prisión
+Noo…noooo
+
+Y ahora en esa silla cruel
+Mirando gente sin rostro
+Ves, esperando, caer
+Miles de hojas de otoño
+Todo en este mundo al revés
+Te grita que queda poco
+Mientras yo lloro tu ayer
+Sumido en este pozo
+
+Y hoy nooooo
+hoy no pienso ir a verte con este dolor
+No quiero borrar tus fotos de la habitación
+No puedo pedir a Dios que rompa esta prisión
+Noo…noooo
+
+Y hoy nooooo
+hoy no pienso ir a verte con este dolor
+No quiero borrar tus fotos de la habitación
+No puedo pedir a Dios que rompa esta prisión
+Noo…noooo
+
+Como te has podido olvidar
+Después de toda una vida
+D’este simple pájaro herido
+Que tu alá protegía
+Cómo tu cerebro cerró
+La puerta donde vivías
+Donde se escondieron ahí
+Los besos que tu tenias
+
+Tantas puestas de sol
+Y tantas noches perdías
+Tantas madrugadas azul
+En las que tu sonreías
+Todo está nublado ahora en ti
+Todo son sombras vacías
+Dile a esa dolencia feroz
+Que tu ya la maldecías
+
+Y hoy nooooo
+hoy no pienso ir a verte con este dolor
+No quiero borrar tus fotos de la habitación
+No puedo pedir a Dios que rompa esta prisión
+Noo…noooo
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+<div id="modal-cancion6" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Que hubiera pasado</h2>
+            <div class="letra-texto">
+
+Tú, en la pista con ese vestido de sombra, el hielo en tu copa derritiéndose en la alfombra.
+Yo, desde el bar sintiendo el beat en las venas, tu risa era un GPS pa' mis cadenas.
+Movías las caderas en clave de código, yo quise ser tu algoritmo, pero fuiste el modo spoiler.
+El DJ puso un remix y el aire vibró, pero tú ni un "hola", solo el eco de tu adiós.
+
+Y yo en plan, ¿qué hubiera pasado si ese brillo en tus ojos me hubiera elegido?
+Si el humo del club no escondió tu mirada, si él “no” era un "si" disfrazado de nada.
+
+Te volviste loca y sé 
+Que me volví loco, y fue 
+Solo en mi memoria, 
+Solo en mi memoria.
+Te volviste loca y te 
+Devoré la boca,y le 
+Devolví a la noche tu…
+Tu mirada rota.
+
+Habríamos roto el alba en un cuarto de hotel, tu perfume en mi chaqueta y en tu piel de papel.
+Un "te quedas" sin hablar, un gemelo en el espejo, que el mundo fuera en pausa como en un videojuego.
+
+Pero tú te fuiste con él, el de la sonrisa vacía, y yo aquí con la última copa y esta melodía.
+
+Y yo en plan, ¿qué hubiera pasado si ese brillo en tus ojos me hubiera alcanzado?
+Si el humo del club no escondió tu mirada, si él “no” era un "si" disfrazado de nada.
+
+Te volviste loca y sé 
+Que me volví loco, y fue 
+Solo en mi memoria, 
+Solo en mi memoria.
+Te volviste loca y te 
+Devoré la boca,y le 
+Devolví a la noche tu…
+Tu mirada rota.
+
+Ahora suena esta canción en todas las radios, y a veces pienso... ¿Fuimos química o colgados?
+Tus fotos en Insta tienen likes de extraños, pero nadie sabe el "casi" que guardo en los daños.
+
+Te volviste loca y sé 
+Que me volví loco, y fue 
+Solo en mi memoria, 
+Solo en mi memoria.
+Te volviste loca y te 
+Devoré la boca,y le 
+Devolví a la noche tu…
+Tu mirada rota.
+
+Y si hubieras mirado, quizá hoy no sería solo un loop en tu playlist...
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+<div id="modal-cancion7" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Noche clara</h2>
+            <div class="letra-texto">
+
+Era una noche clara
+Donde apenabía viento
+Lo vi andando por la acera
+Y seguí su movimiento
+
+El odio iba por mis venas
+Rabia y celos lo que siento
+Él le habia hablado a ella
+Y ella estaba sonriendo
+
+Me cegaba la locura
+La ira me ardia dentro
+Esa luna era de sangre
+Sangre de mi sufrimiento
+
+Ella es mi obsesión oscura
+Mi quietud mi movimiento
+Aunque ya no esté a mi lado
+Soy soldado en ese infierno
+
+Yo lo matéeee,
+Lo hiiice yoooo,
+Lo hice por ti y por mi,
+por nuestro amoooorrr.
+Yo lo mateeeé, siiii
+Odio y rencor
+Y el ver tu mirada de horrorizada 
+Es mi prisión.
+
+Yo lo matéeee,
+Lo hiiice yoooo,
+Lo hice por ti y por mi,
+por nuestro amoooorrr.
+Yo lo mateeeé, siiii
+Odio y rencor
+Y el ver tu mirada de horrorizada 
+Es mi prisión
+
+Era una noche clara
+Donde apenabía viento
+La navaja afilada
+alumbraba el pavimento
+Cuando la sangre brotaba
+fui feliz por un momento
+mi locura lo miraba
+desplomado y en silencio
+
+Yo lo matéeee,
+Lo hiiice yoooo,
+Lo hice por ti y por mi,
+por nuestro amoooorrr.
+Yo lo mateeeé, siiii
+Odio y rencor
+Y el ver tu mirada de horrorizada 
+Es mi prisión
+
+
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+<div id="modal-cancion8" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Partner in crime</h2>
+            <div class="letra-texto">
+
+Tú en el cole, siempre con esa onda chill,
+yo tu partner in crime, desde un recreo sin fin.
+Ahora en tiktok brillas con un look bien real
+viendo cómo cambiaste, rompiendo el flow natural.
+Las risas de antaño eran nuestros beats sin medida,
+ahora cada story tuya enciende mi vida.
+Entre juegos y anécdotas se armó nuestro team,
+pero si te confieso mi crush se piérde lo que es el dream.
+Baby, ¿qué me está pasando al verte cada día?
+Cómo hemos cambiado, joder con la cría.
+Y cuando quedamos, pierdo los sentidos,
+si "amiga" no fuera pretexto pa' mis latidos.
+Y ahora eres mi crush, lo sé,
+me gustas tanto que es pec
+En mi playlist siempre suenas tu
+la niña de los ojos azul.
+Mi amiga de siempre, eyy
+porque ahora eres puro fuego,
+porque ahora yo quiero jugar 
+Contigo a otros juegos. 
+La inocencia que compartimos, memes y tardes sin plan,
+ahora tus posts son hits que hacen brillar el spam.
+Un “quédate” en el recreo, sin más complicación,
+ahora te miro el culo, ey, mi puta conexión.
+Pero te volviste top en cada trending y momento,
+y en mis dms se esconde otro día de tormento.
+Entre risas y stories que hoy casi te quiero,
+y me da miedo perder lo nuestro tan sincero.
+
+Baby, ¿qué me está pasando al verte cada día?
+Cómo hemos cambiado, joder con la cría.
+Y cuando quedamos, pierdo los sentidos,
+si "amiga" no fuera pretexto pa' mis latidos.
+
+Y ahora eres mi crush, lo sé,
+me gustas tanto que es pec
+En mi playlist siempre suenas tu
+la niña de los ojos azul.
+Mi amiga de siempre, eyy
+porque ahora eres puro fuego,
+porque ahora yo quiero jugar 
+Contigo a otros juegos.
+
+Uh, uh, uh, uh, uh, uh...
+Uh, uh, uh, uh, uh, uh...
+
+Ahora suena este hit en cada playlist del barrio,
+y me preguntan si fuimos más que un hashtag diario.
+Tus fotos llenan el feed con likes desconocidos,
+pero nadie capta el casi que guardo en mis latidos.
+
+Y ahora eres mi crush, lo sé,
+me gustas tanto que es pec
+En mi playlist siempre suenas tu
+la niña de los ojos azul.
+Mi amiga de siempre, eyy
+porque ahora eres puro fuego,
+porque ahora yo quiero jugar 
+Contigo a otros juegos.
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+	
+
+	
+<div id="modal-cancion9" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Sweet Barcelona</h2>
+            <div class="letra-texto">
+
+Me encontré allí tirado, 
+borracho en un Cadillac, 
+me pregunté por qué no vuelvo, 
+por qué no tirar atrás. 
+Es en casa donde sueño, 
+donde vivo en libertad. 
+Es en casa donde tú estás, 
+donde no podías faltar.
+
+Bar y Cielo y Sol y Mar, 
+Barcelona es poderosa, ven aquí vas a soñar. 
+Bar y Cielo y Sol y Mar, 
+Barcelona es un latido que no deja de sonar. 
+
+En Montjuic te llevé al cielo, 
+en un asiento de atrás.
+Me dejaste, lo dejamos, 
+perreo triste en 4K. 
+He probado mil sabores, 
+de licores y algo más. 
+Pero mami echo de menos, 
+ver tu risa una vez más.
+
+Bar y Cielo y Sol y Mar, 
+Barcelona es poderosa, ven aquí vas a soñar. 
+Bar y Cielo y Sol y Mar, 
+Barcelona es un latido que no deja de sonar. 
+
+Y ahora que me has olvidado, 
+que no te acuerdas ya de mí.
+Como un loco fuí a tu barrio, 
+donde entonces fui feliz. 
+
+En el Raval mil sabores, en el Gótic mil poetas. 
+Con sus versos de colores, te llevé hasta Canaletas.
+Desde Gracia al Bon, te paseé por cada esquina. 
+De la mano fuimos tú y yo a la Sagrada Familia. 
+Es el Clot y Sant Antoni, el Carmelo y la Sagrera.
+Donde Baby te apretaba, tuertito de la cadera
+Fue en la party en Poble Sec te dejaste besar, 
+desde aquí, desde Nou Barris, ya no te puedo olvidar. 
+
+Bar y Cielo y Sol y Mar, 
+Barcelona es poderosa, ven aquí vas a soñar. 
+Bar y Cielo y Sol y Mar, 
+Barcelona es un latido que no deja de sonar. 
+Bar y Cielo y Sol y Mar, 
+Barcelona es poderosa, ven aquí vas a soñar. 
+Bar y Cielo y Sol y Mar, 
+Barcelona es un latido que no deja de sonar. 
+
+
+Bar y Cielo y Sol y Mar, 
+Barcelona es tan preciosa, ven te vas a enamorar. 
+Bar y Cielo y Sol y Mar, 
+Barcelona es un latido que no deja de sonar. 
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer / Contacto -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Xavi Villaronga</h3>
+                    <p>Músico & Productor</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/proyecto_veterano/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@proyecto.veterano?lang=es" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@ProyectoVeterano" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://open.spotify.com/intl-es/artist/3a4sEyCr78RoYKG7ZufTHS" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
+                        <a href="https://wa.me/+34699684985" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:veteranoproyecto@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section contact-info">
+                    <div class="footer-cta">
+                        <a href="https://music.youtube.com/playlist?list=OLAK5uy_kvnUIfrmK828Q8jA-gAVUDlqUodQBdTvU" class="btn">Escucha en YouTube Music</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Xavi Villaronga | Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        // Navegación sticky y burger menu
+        const navbar = document.getElementById('navbar');
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links li');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            burger.classList.toggle('toggle');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                burger.classList.remove('toggle');
+            });
+        });
+
+        // Desplazamiento suave a las secciones
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animaciones de aparición al hacer scroll
+        const fadeInElements = document.querySelectorAll('.about-container, .video-card');
+        
+        const fadeInOptions = {
+            threshold: 0.3,
+            rootMargin: "0px 0px -100px 0px"
+        };
+        
+        const fadeInObserver = new IntersectionObserver(function(entries, fadeInObserver) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    fadeInObserver.unobserve(entry.target);
+                }
+            });
+        }, fadeInOptions);
+        
+        fadeInElements.forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(50px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            fadeInObserver.observe(element);
+        });
+        
+        // Funcionalidad para mostrar letras de canciones
+        const modal = document.getElementById('lyrics-modal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+
+        // Añadir listeners a todos los botones de letras
+        document.querySelectorAll('.tag-lyrics').forEach(button => {
+            button.addEventListener('click', function() {
+                const lyricsId = this.getAttribute('data-lyrics');
+                const modalId = this.getAttribute('data-cancion');
+                
+                if (modalId) {
+                    const modalElement = document.getElementById(`modal-${modalId}`);
+                    if (modalElement) {
+                        modalElement.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    }
+                } else if (lyricsId) {
+                    const lyricsContent = document.getElementById(lyricsId);
+                    if (lyricsContent) {
+                        // Implementación alternativa usando el atributo data-lyrics
+                    }
+                }
+            });
+        });
+
+        // Cerrar todos los modales
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Cerrar el modal al hacer clic fuera de su contenido
+        window.addEventListener('click', function(event) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Cerrar el modal con la tecla ESC
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (window.getComputedStyle(modal).display === 'block') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+        });
+        
+        // YouTube API y Modal de Video
+        var youtubePlayer;
+        const videoModal = document.getElementById('video-modal');
+        const modalContainer = document.querySelector('.modal-video-container');
+        const closeVideoModalBtn = document.querySelector('.close-video-modal');
+        
+        // Inicializar el reproductor de YouTube cuando se carga la API
+        function onYouTubeIframeAPIReady() {
+            youtubePlayer = new YT.Player('youtube-modal-player', {
+                height: '360',
+                width: '640',
+                videoId: '',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 1,
+                    'rel': 0,
+                    'showinfo': 0
+                }
+            });
+        }
+        
+        // Añadir evento a todos los botones "Ver Video"
+        document.querySelectorAll('.watch-video-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video-id');
+                const isVertical = this.getAttribute('data-vertical') === 'true';
+                
+                // Configurar la ventana modal para el formato correcto (vertical u horizontal)
+                if (isVertical) {
+                    modalContainer.style.width = '360px';  // Ancho para videos 9:16
+                    modalContainer.style.height = '640px'; // Alto para videos 9:16
+                    modalContainer.classList.add('vertical');
+                } else {
+                    modalContainer.style.width = '640px';  // Ancho para videos 16:9
+                    modalContainer.style.height = '360px'; // Alto para videos 16:9
+                    modalContainer.classList.remove('vertical');
+                }
+                
+                // Cargar y reproducir el video
+                if (youtubePlayer) {
+                    youtubePlayer.loadVideoById(videoId);
+                    videoModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Cerrar modal de video
+        closeVideoModalBtn.addEventListener('click', function() {
+            if (youtubePlayer) {
+                youtubePlayer.stopVideo();
+            }
+            videoModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Cerrar modal de video haciendo clic fuera
+        videoModal.addEventListener('click', function(event) {
+            if (event.target === videoModal) {
+                if (youtubePlayer) {
+                    youtubePlayer.stopVideo();
+                }
+                videoModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Cerrar modal de video con ESC
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && videoModal.style.display === 'flex') {
+                if (youtubePlayer) {
+                    youtubePlayer.stopVideo();
+                }
+                videoModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Control de reproducción de audio - solo un audio a la vez
+        const audioPlayers = document.querySelectorAll('audio');
+        let currentlyPlayingAudio = null;
+        
+        audioPlayers.forEach(audio => {
+            audio.addEventListener('play', function() {
+                if (currentlyPlayingAudio && currentlyPlayingAudio !== this) {
+                    currentlyPlayingAudio.pause();
+                }
+                currentlyPlayingAudio = this;
+            });
+        });
+    </script>
+</body>
+</html>
