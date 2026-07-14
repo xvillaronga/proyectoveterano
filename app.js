@@ -12,7 +12,7 @@ const tracks = [
   { title: "Mar de Dudas", file: "09-Mar de Dudas.mp3", duration: "2:09" },
   { title: "Quiero decirte", file: "10-Quiero decirte.mp3", duration: "3:11" },
   { title: "Hace poco", file: "11-Hace poco.mp3", duration: "2:42" },
-  { title: "La Puerta Secreta", file: "12-La puerta secreta.mp3", duration: "3:41" },
+  { title: "La Puerta Secreta", file: "12-La Puerta Secreta.mp3", duration: "3:41" },
   { title: "Calles Mojadas", file: "13-Calles mojadas.mp3", duration: "3:41" },
   { title: "Sinceros", file: "14-Sinceros.mp3", duration: "2:54" },
   { title: "Tan solo una canción", file: "15-Tan solo una cancion.mp3", duration: "3:03" }
