@@ -1,0 +1,21 @@
+{
+  "name": "Proyecto Veterano",
+  "short_name": "Veterano",
+  "description": "Doo-Wop y Rock'n'Roll con alma de los años 50.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0908",
+  "theme_color": "#0a0908",
+  "icons": [
+    {
+      "src": "assets/img/favicon.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/logo-proyecto-veterano.png",
+      "sizes": "700x700",
+      "type": "image/png"
+    }
+  ]
+}
